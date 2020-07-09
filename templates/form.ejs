@@ -1,0 +1,106 @@
+<html>
+<head>
+<style type="text/css">
+.box {
+	display: flex;
+	justify-content: space-between;
+}
+</style>
+</head>
+<body>
+<h1>計算ページ</h1>
+<form method="post">
+	<div>
+		<h3>役</h3>
+		<%- include('./yaku'); %>
+	</div>
+
+	<div>
+		<h3>上がり</h3>
+		<p>
+			<input name="agari" type="radio" value="lon" checked="checked" />ロン
+			<input name="agari" type="radio" value="tsumo" />ツモ
+		</p>
+
+		<h3>親/子</h3>
+		<p>
+			<input name="oyako" type="radio" value="oya" checked="checked" />親
+			<input name="oyako" type="radio" value="ko" />子
+		</p>
+
+		<h3>鳴き</h3>
+		<p>
+			<input name="naki" type="radio" value="ari" checked="checked" />有り
+			<input name="naki" type="radio" value="nashi" />無し
+		</p>
+
+		<%- include('./mentsu'); %>
+		<h3>面子（中張牌）</h3>
+		<span>明刻</span>
+		<input name="chMinko" type="button" value="＋" id="chMinkoUp" />
+		<input name="chMinko" type="button" value="リセット" id="chMinkoDown" />
+		<input name="chMinko" type="text" value="0" id="chMinkoDisp" />
+		<br>
+		<span>暗刻</span>
+		<input name="chAnko" type="button" value="＋" id="chAnkoUp" />
+		<input name="chAnko" type="button" value="リセット" id="chAnkoDown" />
+		<input name="chAnko" type="text" value="0" id="chAnkoDisp" />
+		<br>
+		<span>明槓</span>
+		<input name="chMinkan" type="button" value="＋" id="chMinkanUp" />
+		<input name="chMinkan" type="button" value="リセット" id="chMinkanDown" />
+		<input name="chMinkan" type="text" value="0" id="chMinkanDisp" />
+		<br>
+		<span>暗槓</span>
+		<input name="chAnkan" type="button" value="＋" id="chAnkanUp" />
+		<input name="chAnkan" type="button" value="リセット" id="chAnkanDown" />
+		<input name="chAnkan" type="text" value="0" id="chAnkanDisp" />
+
+		<h3>面子（幺九牌）</h3>
+		<span>明刻</span>
+		<input name="yoMinko" type="button" value="＋" id="yoMinkoUp" />
+		<input name="yoMinko" type="button" value="リセット" id="yoMinkoDown" />
+		<input name="yoMinko" type="text" value="0" id="yoMinkoDisp" />
+		<br>
+		<span>暗刻</span>
+		<input name="yoAnko" type="button" value="＋" id="yoAnkoUp" />
+		<input name="yoAnko" type="button" value="リセット" id="yoAnkoDown" />
+		<input name="yoAnko" type="text" value="0" id="yoAnkoDisp" />
+		<br>
+		<span>明槓</span>
+		<input name="yoMinkan" type="button" value="＋" id="yoMinkanUp" />
+		<input name="yoMinkan" type="button" value="リセット" id="yoMinkanDown" />
+		<input name="yoMinkan" type="text" value="0" id="yoMinkanDisp" />
+		<br>
+		<span>暗槓</span>
+		<input name="yoAnkan" type="button" value="＋" id="yoAnkanUp" />
+		<input name="yoAnkan" type="button" value="リセット" id="yoAnkanDown" />
+		<input name="yoAnkan" type="text" value="0" id="yoAnkanDisp" />
+
+		<h3>ドラ</h3>
+		<span>ドラ数</span>
+		<input name="dora" type="button" value="＋" id="doraUp" />
+		<input name="dora" type="button" value="リセット" id="doraDown" />
+		<input name="dora" type="text" value="0" id="doraDisp" />
+
+		<h3>雀頭</h3>
+		<p>
+			<input name="janto" type="radio" value="jibasanngen" checked="checked" />自風/場風/三元
+			<input name="janto" type="radio" value="renpu" />連風
+			<input name="janto" type="radio" value="sonota" />数/客風
+		</p>
+
+		<h3>待ち</h3>
+		<p>
+			<input name="machi" type="radio" value="penkantanno" checked="checked" />辺張/嵌張/単騎/ノベタン
+			<input name="machi" type="radio" value="sonota" />両面/シャボ
+		</p>
+	</div>
+
+	<div>
+		<input type="submit" value="CALC" />
+	</div>
+</form>
+</body>
+</html>
+

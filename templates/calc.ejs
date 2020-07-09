@@ -1,0 +1,336 @@
+<h1>計算結果</h1>
+<% var fusu = 20; %>
+<% var hansu = 0; %>
+<% var notenFlag = 0; %>
+<% var kuiSagariFlag = 0; %>
+<% var kisoten = 0; %>
+<% var koHarai = 0; %>
+<% var oyaHarai = 0; %>
+
+<!-- 配列数１の時str型になる対応が必要 -->
+<!--    上記の場合[1]が一文字になる    -->
+<!--              １翻加算             -->
+<% if (data['1han']) { %>
+<% var hanNum = data['1han'].length; %>
+<% if (data['1han'][1].length == 1) { %>
+<% hanNum = 1; %>
+<% } %>
+<% hansu = hansu + hanNum; %>
+<% } %>
+
+<!--              ２翻加算             -->
+<% if (data['2han']) { %>
+<% hanNum = data['2han'].length; %>
+<% if (data['2han'][1].length == 1) { %>
+<% hanNum = 1; %>
+<% } %>
+<% hansu = hansu + (hanNum * 2); %>
+<% } %>
+
+<!--              ３翻加算             -->
+<% if (data['3han']) { %>
+<% hanNum = data['3han'].length; %>
+<% if (data['3han'][1].length == 1) { %>
+<% hanNum = 1; %>
+<% } %>
+<% hansu = hansu + (hanNum * 3); %>
+<% } %>
+
+<!--              ４翻加算             -->
+<% if (data['4han']) { %>
+<% hanNum = data['4han'].length; %>
+<% if (data['4han'][1].length == 1) { %>
+<% hanNum = 1; %>
+<% } %>
+<% hansu = hansu + (hanNum * 4); %>
+<% } %>
+
+<!--              ６翻加算             -->
+<% if (data['6han']) { %>
+<% hanNum = data['6han'].length; %>
+<% if (data['6han'][1].length == 1) { %>
+<% hanNum = 1; %>
+<% } %>
+<% hansu = hansu + (hanNum * 6); %>
+<% } %>
+
+<!-- 食い下がり減算 -->
+<% if (data.naki === 'ari') { %>
+<!-- 1han -->
+<% if (data['1han']) { %>
+<% for (var i=0; i<data['1han'].length; i++) { %>
+<% if (data['1han'][i] == '立直' || data['1han'][i] == '立') { %>
+<% console.log('鳴き有り/立直あり') %>
+<% kuiSagariFlag = 1 %>
+<% } %>
+<% } %>
+<% if (kuiSagariFlag >= 1) { %>
+<% kuiSagariFlag = 0 %>
+<% hansu = hansu - 1 %>
+<% } %>
+<!-- 1hanおわり -->
+<% } %>
+<!-- 2han -->
+<% if (data['2han']) { %>
+<!-- 三色同順 -->
+<% for (var i=0; i<data['2han'].length; i++) { %>
+<% if (data['2han'][i] == '三色同順' || data['2han'][i] == '三') { %>
+<% console.log('鳴き有り/三色同順あり') %>
+<% kuiSagariFlag = 1 %>
+<% } %>
+<% } %>
+<% if (kuiSagariFlag >= 1) { %>
+<% kuiSagariFlag = 0 %>
+<% hansu = hansu - 1 %>
+<% } %>
+<!-- 混全帯幺九 -->
+<% for (var i=0; i<data['2han'].length; i++) { %>
+<% if (data['2han'][i] == '混全帯幺九' || data['2han'][i] == '混') { %>
+<% console.log('鳴き有り/混全帯幺九あり') %>
+<% kuiSagariFlag = 1 %>
+<% } %>
+<% } %>
+<% if (kuiSagariFlag >= 1) { %>
+<% kuiSagariFlag = 0 %>
+<% hansu = hansu - 1 %>
+<% } %>
+<!-- 一気通貫 -->
+<% for (var i=0; i<data['2han'].length; i++) { %>
+<% if (data['2han'][i] == '一気通貫' || data['2han'][i] == '一') { %>
+<% console.log('鳴き有り/一気通貫あり') %>
+<% kuiSagariFlag = 1 %>
+<% } %>
+<% } %>
+<% if (kuiSagariFlag >= 1) { %>
+<% kuiSagariFlag = 0 %>
+<% hansu = hansu - 1 %>
+<% } %>
+<!-- 2hanおわり -->
+<% } %>
+<!-- 3han -->
+<% if (data['3han']) { %>
+<!-- 純全帯幺九 -->
+<% for (var i=0; i<data['3han'].length; i++) { %>
+<% if (data['3han'][i] == '純全帯幺九' || data['3han'][i] == '純') { %>
+<% console.log('鳴き有り/純全帯幺九あり') %>
+<% kuiSagariFlag = 1 %>
+<% } %>
+<% } %>
+<% if (kuiSagariFlag >= 1) { %>
+<% kuiSagariFlag = 0 %>
+<% hansu = hansu - 1 %>
+<% } %>
+<!-- 混一色 -->
+<% for (var i=0; i<data['3han'].length; i++) { %>
+<% if (data['3han'][i] == '混一色' || data['3han'][i] == '混') { %>
+<% console.log('鳴き有り/混一色あり') %>
+<% kuiSagariFlag = 1 %>
+<% } %>
+<% } %>
+<% if (kuiSagariFlag >= 1) { %>
+<% kuiSagariFlag = 0 %>
+<% hansu = hansu - 1 %>
+<% } %>
+<!-- 3hanおわり -->
+<% } %>
+<!-- 6han -->
+<% if (data['6han']) { %>
+<!-- 清一色 -->
+<% for (var i=0; i<data['6han'].length; i++) { %>
+<% if (data['6han'][i] == '清一色' || data['6han'][i] == '清') { %>
+<% console.log('鳴き有り/清一色あり') %>
+<% kuiSagariFlag = 1 %>
+<% } %>
+<% } %>
+<% if (kuiSagariFlag >= 1) { %>
+<% kuiSagariFlag = 0 %>
+<% hansu = hansu - 1 %>
+<% } %>
+<!-- 6hanおわり -->
+<% } %>
+<!-- 食い下がり減算おわり -->
+<% } %>
+
+<!-- ノーテン判定 -->
+<% if (hansu <= 0) { %>
+<% notenFlag = 1 %>
+<% } %>
+
+<!-- ドラ加算 -->
+<% if (data.dora != 0) { %>
+<% hansu = hansu + Number(data.dora) %>
+<% } %>
+
+<!-- 上り符数判定  -->
+<% if (data.agari === 'lon' && data.naki === 'nashi') { %>
+<% fusu = fusu + 10 %>
+<% } else if (data.agari === 'tsumo') { %>
+<% fusu = fusu + 2 %>
+<% } %>
+
+<!-- 面子(中張牌)符数判定  -->
+<% if (data.chMinko != 0) { %>
+<% fusu = fusu + (data.chMinko * 2) %>
+<% } %>
+<% if (data.chAnko != 0) { %>
+<% fusu = fusu + (data.chAnko * 4) %>
+<% } %>
+<% if (data.chMinkan != 0) { %>
+<% fusu = fusu + (data.chMinkan * 8) %>
+<% } %>
+<% if (data.chAnkan != 0) { %>
+<% fusu = fusu + (data.chAnkan * 16) %>
+<% } %>
+
+<!-- 面子(幺九牌)符数判定  -->
+<% if (data.yoMinko != 0) { %>
+<% fusu = fusu + (data.yoMinko * 4) %>
+<% } %>
+<% if (data.yoAnko != 0) { %>
+<% fusu = fusu + (data.yoAnko * 8) %>
+<% } %>
+<% if (data.yoMinkan != 0) { %>
+<% fusu = fusu + (data.yoMinkan * 16) %>
+<% } %>
+<% if (data.yoAnkan != 0) { %>
+<% fusu = fusu + (data.yoAnkan * 32) %>
+<% } %>
+
+<!-- 雀頭符数判定  -->
+<% if (data.janto === 'jibasanngen') { %>
+<% fusu = fusu + 2 %>
+<% } %>
+<% if (data.janto === 'renpu') { %>
+<% fusu = fusu + 2 %>
+<% } %>
+
+<!-- 待ち符数判定  -->
+<% if (data.machi === 'penkantanno') { %>
+<% fusu = fusu + 2 %>
+<% } %>
+
+<!-- 符丸め -->
+<% fusu = (Math.ceil(fusu / 10) * 10) %>
+<!--  子  -->
+<% if (data.oyako === 'ko') { %>
+<% kisoten = fusu * 4 * (2 ** (hansu + 2)) %>
+<% } %>
+<!--  親  -->
+<% if (data.oyako === 'oya') { %>
+<% kisoten = fusu * 6 * (2 ** (hansu + 2)) %>
+<% } %>
+<!--  丸め  -->
+<% kisoten = (Math.ceil(kisoten / 100) * 100) %>
+
+<!-- 0翻判定 -->
+<% if (hansu <= 0) { %>
+<% kisoten = 0 %>
+<% } %>
+
+<!-- 満貫以上判定（子） -->
+<% if (data.oyako === 'ko') { %>
+<% if (hansu == 3 && fusu >= 70) { %>
+<% kisoten = 8000 %>
+<% } %>
+<% if (hansu == 4 && (40 <= fusu && fusu <= 60)) { %>
+<% kisoten = 8000 %>
+<% } %>
+<% if (hansu == 5) { %>
+<% kisoten = 8000 %>
+<% } %>
+<% if (hansu == 6 || hansu == 7) { %>
+<% kisoten = 12000 %>
+<% } %>
+<% if (8 <= hansu && hansu <= 10) { %>
+<% kisoten = 16000 %>
+<% } %>
+<% if (11 <= hansu && hansu <= 12) { %>
+<% kisoten = 24000 %>
+<% } %>
+<% if (13 <= hansu) { %>
+<% kisoten = 32000 %>
+<% } %>
+<% } %>
+
+<!-- 満貫以上判定（親） -->
+<% if (data.oyako === 'oya') { %>
+<% if (hansu == 3 && fusu >= 70) { %>
+<% kisoten = 12000 %>
+<% } %>
+<% if (hansu == 4 && (40 <= fusu && fusu <= 60)) { %>
+<% kisoten = 12000 %>
+<% } %>
+<% if (hansu == 5) { %>
+<% kisoten = 12000 %>
+<% } %>
+<% if (hansu == 6 || hansu == 7) { %>
+<% kisoten = 18000 %>
+<% } %>
+<% if (8 <= hansu && hansu <= 10) { %>
+<% kisoten = 24000 %>
+<% } %>
+<% if (11 <= hansu && hansu <= 12) { %>
+<% kisoten = 36000 %>
+<% } %>
+<% if (13 <= hansu) { %>
+<% kisoten = 48000 %>
+<% } %>
+<% } %>
+
+<!-- 表示用計算（親） -->
+<% if (data.oyako === 'oya') { %>
+<% if (data.agari === 'tsumo') { %>
+<% koHarai = kisoten / 3; %>
+<% oyaHarai = ''; %>
+<% } else if (data.agari === 'lon') { %>
+<% koHarai = kisoten; %>
+<% oyaHarai = ''; %>
+<% } %>
+<% } %>
+<%  %>
+<!-- 表示用計算（子） -->
+<% if (data.oyako === 'ko') { %>
+<% if (data.agari === 'tsumo') { %>
+<% koHarai = kisoten / 4; %>
+<% oyaHarai = kisoten / 2; %>
+<% } else if (data.agari === 'lon') { %>
+<% koHarai = kisoten; %>
+<% oyaHarai = ''; %>
+<% } %>
+<% } %>
+
+<!--  丸め  -->
+<% koHarai = (Math.ceil(koHarai / 100) * 100) %>
+<% oyaHarai = (Math.ceil(oyaHarai / 100) * 100) %>
+
+<% if (notenFlag == 1) { %>
+<% koHarai = 0 %>
+<% oyaHarai = 0 %>
+<% } %>
+
+<% console.log(hansu) %>
+<% console.log(fusu) %>
+<% console.log(kisoten) %>
+<% console.log(koHarai) %>
+<% console.log(oyaHarai) %>
+<% console.log(data) %>
+
+<!-- 表示 -->
+<div class="box">
+        <div class="item">
+		<%= hansu %>翻
+        </div>
+        <div class="item">
+		<%= fusu %>符
+        </div>
+</div>
+<div class="box">
+        <div class="item">
+		<%= koHarai %>
+        </div>
+        <div class="item">
+		<%= oyaHarai %>
+        </div>
+</div>
+<br><br>
+

@@ -1,0 +1,77 @@
+<style type="text/css">
+.box {
+}
+.item {
+	width: 40%;
+	float: left
+}
+</style>
+
+<!--   計算関数読込   -->
+<%- include('./calc', data); %>
+<!---------------------->
+
+<h1>上がり</h1>
+<p>役　　　　　　：
+	<ul>
+		<li>１翻：<%= data['1han'] %></li>
+		<li>２翻：<%= data['2han'] %></li>
+		<li>３翻：<%= data['3han'] %></li>
+		<li>４翻：<%= data['4han'] %></li>
+		<li>６翻：<%= data['6han'] %></li>
+	</ul></p>
+
+<p>上がり　　　　：
+<% if (data.agari === 'lon') { %>
+ロン
+<% } else if (data.agari === 'tsumo') { %>
+ツモ
+<% } %></p>
+
+<p>親子　　　　　：
+<% if (data.oyako === 'oya') { %>
+親
+<% } else if (data.oyako === 'ko') { %>
+子
+<% } %></p>
+
+<p>鳴き　　　　　：
+<% if (data.naki === 'ari') { %>
+有り
+<% } else if (data.naki === 'nashi') { %>
+無し
+<% } %></p>
+
+<p>面子（中張牌）：
+	<ul>
+		<li>明刻（2符） ：<%= data.chMinko %></li>
+		<li>暗刻（4符） ：<%= data.chAnko %></li>
+		<li>明槓（8符） ：<%= data.chMinkan %></li>
+		<li>暗槓（16符）：<%= data.chAnkan %></li>
+	</ul></p>
+
+<p>面子（幺九牌）：
+	<ul>
+		<li>明刻（4符） ：<%= data.yoMinko %></li>
+		<li>暗刻（8符） ：<%= data.yoAnko %></li>
+		<li>明槓（16符）：<%= data.yoMinkan %></li>
+		<li>暗槓（32符）：<%= data.yoAnkan %></li>
+	</ul></p>
+
+<p>ドラ数　　　　：<%= data.dora %></p>
+
+<p>雀頭　　　　　：
+<% if (data.janto === 'jibasanngen') { %>
+自風/場風/三元（2符)
+<% } else if (data.janto === 'renpu') { %>
+連風（2符）
+<% } else if (data.janto === 'sonota') { %>
+数/客風（0符）
+<% } %></p>
+
+<p>待ち　　　　　：
+<% if (data.machi === 'penkantanno') { %>
+辺張/嵌張/単騎/ノベタン（2符）
+<% } else if (data.machi === 'sonota') { %>
+両面/シャボ（0符）
+<% } %></p>
