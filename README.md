@@ -14,6 +14,13 @@
 
 # AWS操作手順
 
+- CloudFormation.yml編集
+  - 3000/tcpを開放したSecurityGroupを指定
+- CloudFormation.ymlをS3にアップロード
+- CloudFormationを実行
+  - アップしたymlのオブジェクトURLを入力してテンプレートソースを指定する
+<img width="1440" alt="cloudformation" src="https://user-images.githubusercontent.com/53789788/87055100-dd03dc00-c23e-11ea-962e-4a55fac451e5.png">
+
 # テスト用コマンド備忘録
 ※CloudFormationのUserDataで自動化済み
 
